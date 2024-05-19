@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.example.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "net.bluemangoo.hypertension.fabric.mixin.ExampleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

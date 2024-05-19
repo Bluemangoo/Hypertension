@@ -1,0 +1,7 @@
+name: Hypertension
+version: '${version}'
+main: net.bluemangoo.hypertension.spigot.Hypertension
+api-version: '1.20'
+authors: [ Bluemangoo ]
+description: Treat your low blood pressure.
+website: https://github.com/Bluemangoo/Hypertension
