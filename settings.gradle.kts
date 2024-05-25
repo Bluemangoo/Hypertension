@@ -12,5 +12,5 @@ plugins {
 
 rootProject.name = "Hypertension"
 
-include("spigot")
-include("fabric")
+include("hypertension-spigot")
+include("hypertension-fabric")
