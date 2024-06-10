@@ -70,8 +70,11 @@ public class DamageListener implements Listener {
             if (currentHealth > fullHealth) {
                 fullHealth = currentHealth;
             }
+            if (fullHealth > currentHealth * 8) {
+                fullHealth = currentHealth * 8;
+            }
             if (this.random.nextDouble() * fullHealth > currentHealth) {
-                if (this.random.nextInt(0, 3) > 0) {
+                if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);
                 } else {
                     event.setDamage(0);
@@ -79,8 +82,8 @@ public class DamageListener implements Listener {
                 this.spawnMissParticle(mob);
                 return;
             }
-            if (this.random.nextInt(0, 3) == 0) {
-                if (this.random.nextInt(0, 3) > 0) {
+            if (this.random.nextInt(0, 4) == 0) {
+                if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);
                 } else {
                     event.setDamage(event.getDamage() * this.random.nextDouble());
