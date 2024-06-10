@@ -9,11 +9,5 @@ public final class Hypertension extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new DamageListener(this), this);
-
-    }
-
-    @Override
-    public void onDisable() {
-        super.onDisable();
     }
 }
