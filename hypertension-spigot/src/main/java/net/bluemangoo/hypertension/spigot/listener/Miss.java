@@ -74,6 +74,7 @@ public class Miss implements Listener {
             || this.CAUSE_TO_DECREASE_DAMAGE.contains(event.getCause())) {
             double fullHealth = Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             double currentHealth = mob.getHealth();
+            currentHealth = Math.ceil(currentHealth / 2);
             if (currentHealth > fullHealth) {
                 fullHealth = currentHealth;
             }
@@ -85,19 +86,13 @@ public class Miss implements Listener {
                 luckyLevel = LuckyLevel.getLuckyLevel((Player) event.getDamageSource().getCausingEntity());
             }
             if (this.random.nextDouble() * fullHealth > currentHealth && this.random.nextInt(0, 10 - luckyLevel * 3) == 0) {
+                if ((event.getDamageSource().getCausingEntity() instanceof Player player) && this.random.nextInt(0, 51) == 0) {
+                    player.damage(this.random.nextDouble() * event.getDamage(), event.getDamageSource());
+                }
                 if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);
                 } else {
                     event.setDamage(0);
-                }
-                this.spawnMissParticle(mob);
-                return;
-            }
-            if (this.random.nextInt(0, 4) == 0) {
-                if (this.random.nextInt(0, 4) > 0) {
-                    event.setCancelled(true);
-                } else {
-                    event.setDamage(event.getDamage() * this.random.nextDouble());
                 }
                 this.spawnMissParticle(mob);
             }
