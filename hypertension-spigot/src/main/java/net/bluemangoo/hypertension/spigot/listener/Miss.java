@@ -31,7 +31,8 @@ public class Miss implements Listener {
         EntityDamageEvent.DamageCause.LIGHTNING,
         EntityDamageEvent.DamageCause.MAGIC,
         EntityDamageEvent.DamageCause.ENTITY_EXPLOSION,
-        EntityDamageEvent.DamageCause.BLOCK_EXPLOSION
+        EntityDamageEvent.DamageCause.BLOCK_EXPLOSION,
+        EntityDamageEvent.DamageCause.FALL
     );
     protected final Random random = new Random();
 
@@ -83,7 +84,7 @@ public class Miss implements Listener {
             if ((event.getDamageSource().getCausingEntity() instanceof Player)) {
                 luckyLevel = LuckyLevel.getLuckyLevel((Player) event.getDamageSource().getCausingEntity());
             }
-            if (this.random.nextDouble() * fullHealth > currentHealth && this.random.nextInt(0, 10 - luckyLevel*3) == 0) {
+            if (this.random.nextDouble() * fullHealth > currentHealth && this.random.nextInt(0, 10 - luckyLevel * 3) == 0) {
                 if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);
                 } else {
