@@ -2,6 +2,7 @@ package net.bluemangoo.hypertension.spigot.listener;
 
 import com.google.common.collect.ImmutableList;
 import net.bluemangoo.hypertension.spigot.Hypertension;
+import net.bluemangoo.hypertension.spigot.utils.LuckyLevel;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Mob;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.Random;
 
-public class DamageListener implements Listener {
+public class Miss implements Listener {
     protected final Hypertension plugin;
     protected final ImmutableList<EntityDamageEvent.DamageCause> CAUSE_NOT_TO_DIE = ImmutableList.of(
         EntityDamageEvent.DamageCause.FIRE
@@ -25,11 +26,16 @@ public class DamageListener implements Listener {
         EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK,
         EntityDamageEvent.DamageCause.PROJECTILE);
     protected final ImmutableList<EntityDamageEvent.DamageCause> CAUSE_TO_DECREASE_DAMAGE = ImmutableList.of(
-        EntityDamageEvent.DamageCause.DRAGON_BREATH
+        EntityDamageEvent.DamageCause.DRAGON_BREATH,
+        EntityDamageEvent.DamageCause.POISON,
+        EntityDamageEvent.DamageCause.LIGHTNING,
+        EntityDamageEvent.DamageCause.MAGIC,
+        EntityDamageEvent.DamageCause.ENTITY_EXPLOSION,
+        EntityDamageEvent.DamageCause.BLOCK_EXPLOSION
     );
     protected final Random random = new Random();
 
-    public DamageListener(Hypertension plugin) {
+    public Miss(Hypertension plugin) {
         this.plugin = plugin;
     }
 
@@ -37,7 +43,7 @@ public class DamageListener implements Listener {
         BoundingBox boundingBox = mob.getBoundingBox();
         mob.getWorld().spawnParticle(
             Particle.COMPOSTER, mob.getLocation().setDirection(boundingBox.getCenter()),
-            (int) Math.ceil(boundingBox.getVolume()) * 30,
+            (int) Math.ceil(Math.sqrt(boundingBox.getVolume())) * 50,
             boundingBox.getWidthX() / 1.5,
             boundingBox.getHeight() / 1.5,
             boundingBox.getWidthZ() / 1.5);
@@ -70,10 +76,14 @@ public class DamageListener implements Listener {
             if (currentHealth > fullHealth) {
                 fullHealth = currentHealth;
             }
-            if (fullHealth > currentHealth * 8) {
-                fullHealth = currentHealth * 8;
+            if (fullHealth > currentHealth * 100) {
+                fullHealth = currentHealth * 100;
             }
-            if (this.random.nextDouble() * fullHealth > currentHealth) {
+            int luckyLevel = 0;
+            if ((event.getDamageSource().getCausingEntity() instanceof Player)) {
+                luckyLevel = LuckyLevel.getLuckyLevel((Player) event.getDamageSource().getCausingEntity());
+            }
+            if (this.random.nextDouble() * fullHealth > currentHealth && this.random.nextInt(0, 10 - luckyLevel*3) == 0) {
                 if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);
                 } else {
