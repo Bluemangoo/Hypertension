@@ -88,7 +88,7 @@ public class Miss implements Listener {
             }
             if ((this.random.nextDouble() * fullHealth > currentHealth) && !(this.random.nextInt(0, 10 - luckyLevel * 3) == 0)) {
                 if ((event.getDamageSource().getCausingEntity() instanceof Player player) && this.random.nextInt(0, 4) == 0) {
-                    player.damage(player.getHealth() - this.random.nextDouble() * 2 * event.getDamage(), event.getDamageSource());
+                    player.damage(player.getHealth() - this.random.nextDouble() * (2 - (double) luckyLevel / 2) * event.getDamage(), event.getDamageSource());
                 }
                 if (this.random.nextInt(0, 4) > 0) {
                     event.setCancelled(true);

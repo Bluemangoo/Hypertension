@@ -1,6 +1,7 @@
 package net.bluemangoo.hypertension.spigot.listener;
 
 import net.bluemangoo.hypertension.spigot.Hypertension;
+import net.bluemangoo.hypertension.spigot.utils.LuckyLevel;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +29,6 @@ public class PvpPunishment implements Listener {
         if (event.getEntity() == event.getDamageSource().getCausingEntity()) {
             return;
         }
-        player.damage(event.getDamage() * 3 * random.nextDouble(), event.getDamageSource());
+        player.damage(event.getDamage() * (3 - LuckyLevel.getLuckyLevel(player)) * random.nextDouble(), event.getDamageSource());
     }
 }
