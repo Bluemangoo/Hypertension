@@ -29,6 +29,6 @@ public class PvpPunishment implements Listener {
         if (event.getEntity() == event.getDamageSource().getCausingEntity()) {
             return;
         }
-        player.damage(event.getDamage() * (3 - LuckyLevel.getLuckyLevel(player)) * random.nextDouble(), event.getDamageSource());
+        player.damage(event.getDamage() * (6 - LuckyLevel.getLuckyLevel(player) * 2) * random.nextDouble(), event.getDamageSource());
     }
 }
