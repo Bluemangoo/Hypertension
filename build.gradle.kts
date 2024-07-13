@@ -1,7 +1,7 @@
 println("Charset: ${System.out.charset()}")
 
 allprojects {
-    version = "1.0"
+    version = "1.1"
     tasks.withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
     }
