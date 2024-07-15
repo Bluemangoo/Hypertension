@@ -19,8 +19,6 @@ public class MobCopy implements Listener {
             EntityType.ENDERMITE,
             EntityType.PHANTOM,
             EntityType.SLIME,
-            EntityType.SPIDER,
-            EntityType.CAVE_SPIDER,
             EntityType.MAGMA_CUBE,
             EntityType.GHAST
         );
