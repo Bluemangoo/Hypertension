@@ -1,22 +1,20 @@
 package net.bluemangoo.hypertension.fabric;
 
+import com.google.common.collect.ImmutableList;
+import net.bluemangoo.hypertension.fabric.listener.*;
 import net.fabricmc.api.ModInitializer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Hypertension implements ModInitializer {
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
-    public static final Logger LOGGER = LoggerFactory.getLogger("Hypertension");
+    public static final ImmutableList<EntityDamageListener> ENTITY_DAMAGE_LISTENERS = ImmutableList.of(
+        new FallDamage(),
+        new Miss(),
+        new PvpPunishment()
+    );
+    public static final ImmutableList<EntityDeathListener> ENTITY_DEATH_LISTENERS = ImmutableList.of(
+        new MobCopy()
+    );
 
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
-
-        LOGGER.info("Hello Fabric world!");
     }
 }

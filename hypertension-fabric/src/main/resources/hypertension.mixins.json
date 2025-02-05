@@ -1,9 +1,10 @@
 {
   "required": true,
-  "package": "com.example.mixin",
+  "package": "net.bluemangoo.hypertension.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "net.bluemangoo.hypertension.fabric.mixin.ExampleMixin"
+    "LivingEntityMixin",
+    "MonsterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
