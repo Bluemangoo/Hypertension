@@ -7,6 +7,7 @@ import net.bluemangoo.hypertension.fabric.Hypertension;
 import net.bluemangoo.hypertension.fabric.event.EntityDamageEvent;
 import net.bluemangoo.hypertension.fabric.event.EntityDeathEvent;
 import net.bluemangoo.hypertension.fabric.mixinutils.DropEntity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,8 +31,9 @@ public abstract class LivingEntityMixin implements DropEntity {
         doDrop = false;
     }
 
-    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void hurt(DamageSource damageSource,
+    @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
+    public void hurt(ServerLevel serverLevel,
+                     DamageSource damageSource,
                      float f,
                      CallbackInfoReturnable<Boolean> cir,
                      @Local(argsOnly = true) LocalRef<DamageSource> damageSourceRef,

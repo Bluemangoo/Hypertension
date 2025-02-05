@@ -6,6 +6,7 @@ import net.bluemangoo.hypertension.fabric.mixinutils.DropEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -33,7 +34,7 @@ public class MobCopy implements EntityDeathListener {
             Vec3 position = entity.position();
             for (int i = 0; i < count; i++) {
                 var type = entity.getType();
-                Entity newEntity = type.create(serverLevel);
+                Entity newEntity = type.create(serverLevel, EntitySpawnReason.EVENT);
                 if (newEntity != null) {
                     newEntity.moveTo(position.x, position.y, position.z, entity.getYRot(), entity.getXRot());
                     var dropEntity = (DropEntity) newEntity;

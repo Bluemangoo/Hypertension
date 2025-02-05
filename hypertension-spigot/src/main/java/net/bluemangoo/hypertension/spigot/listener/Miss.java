@@ -72,7 +72,7 @@ public class Miss implements Listener {
         }
         if (this.PLAYER_CAUSE_TO_DECREASE_DAMAGE.contains(event.getCause()) && (event.getDamageSource().getCausingEntity() instanceof Player)
             || this.CAUSE_TO_DECREASE_DAMAGE.contains(event.getCause())) {
-            double fullHealth = Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+            double fullHealth = Objects.requireNonNull(mob.getAttribute(Attribute.MAX_HEALTH)).getValue();
             double currentHealth = mob.getHealth();
             currentHealth = Math.ceil(currentHealth);
             if (currentHealth > fullHealth) {
