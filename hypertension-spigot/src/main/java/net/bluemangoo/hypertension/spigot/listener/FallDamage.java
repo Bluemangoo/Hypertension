@@ -28,7 +28,7 @@ public class FallDamage implements Listener {
         }
         int luckyLevel = LuckyLevel.getLuckyLevel(player);
         double damage = event.getDamage();
-        damage = damage * this.random.nextDouble() * (10 - luckyLevel * 3);
+        damage = damage * this.random.nextDouble() * (11 - luckyLevel * 3) / 2;
         event.setDamage(damage);
     }
 }

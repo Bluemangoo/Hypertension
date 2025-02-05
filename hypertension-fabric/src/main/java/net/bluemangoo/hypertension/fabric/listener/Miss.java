@@ -51,6 +51,10 @@ public class Miss implements EntityDamageListener {
             return;
         }
 
+        if (event.getEntity() instanceof Player && !(event.getSource().getEntity() instanceof Player)) {
+            return;
+        }
+
         if (event.getSource().getEntity() == null) {
             return;
         }
@@ -69,7 +73,6 @@ public class Miss implements EntityDamageListener {
             double fullHealth = mob.getMaxHealth();
             double currentHealth = mob.getHealth();
             currentHealth = Math.ceil(currentHealth);
-            fullHealth *= 2;
             if (currentHealth > fullHealth) {
                 fullHealth = currentHealth;
             }
@@ -80,7 +83,7 @@ public class Miss implements EntityDamageListener {
             if (event.getSource().getEntity() instanceof Player player) {
                 luckyLevel = LuckyLevel.getLuckyLevel(player);
             }
-            if ((this.random.nextDouble() * fullHealth > currentHealth) && !(this.random.nextInt(10 - luckyLevel * 3) == 0)) {
+            if ((this.random.nextDouble() * fullHealth > currentHealth * 3) && !(this.random.nextInt(10 - luckyLevel * 3) == 0)) {
                 if ((event.getSource().getEntity() instanceof Player player) && this.random.nextInt(4) == 0) {
                     player.hurt(event.getSource(), (float) (player.getHealth() - this.random.nextDouble() * (2 - (double) luckyLevel / 2) * event.getDamage()));
                 }
@@ -92,6 +95,5 @@ public class Miss implements EntityDamageListener {
                 }
             }
         }
-        return;
     }
 }
